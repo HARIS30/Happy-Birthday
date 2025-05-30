@@ -22,7 +22,7 @@
       user-select: none;
       gap: 60px;
       overflow: hidden;
-      padding: 0 20px; /* Menambahkan padding untuk perangkat kecil */
+      padding: 0 20px;
     }
 
     @keyframes bgAnimation {
@@ -32,8 +32,8 @@
     }
 
     .container {
-      border: 6px solid #f97316;
-      padding: 40px 20px; /* Mengurangi padding untuk responsif */
+      /* border: 6px solid #f97316; */ /* Dihapus agar tidak ada border oranye */
+      padding: 40px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -41,11 +41,9 @@
       box-sizing: border-box;
       user-select: none;
       max-width: 600px;
-      width: 90vw; /* Menggunakan 90vw untuk responsif */
+      width: 90vw;
       background: rgba(20, 20, 20, 0.85);
-      box-shadow:
-        0 0 15px #f97316,
-        inset 0 0 15px #f97316;
+      box-shadow: none; /* Menghapus efek glow oranye */
       border-radius: 16px;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -76,7 +74,7 @@
 
     .menu {
       display: flex;
-      gap: 20px; /* Mengurangi jarak antar tombol untuk responsif */
+      gap: 20px;
       justify-content: center;
       flex-wrap: wrap;
       width: 100%;
@@ -93,7 +91,7 @@
       border: none;
       user-select: none;
       transition: all 0.3s ease;
-      width: 150px; /* Mengurangi lebar tombol untuk responsif */
+      width: 150px;
       border-radius: 12px;
       box-shadow:
         0 0 8px rgba(0,0,0,0.6),
@@ -109,7 +107,6 @@
         0 8px 16px #f97316;
     }
 
-    /* Gradient background + glow on hover */
     button#btn-message {
       background: linear-gradient(45deg, #2e7d32, #60ad5e);
       box-shadow: 0 0 10px #2e7d32;
@@ -146,14 +143,13 @@
       transform: scale(1.1);
     }
 
-    /* Media Queries untuk perangkat kecil */
     @media (max-width: 600px) {
       #happy-birthday {
-        font-size: 1.5rem; /* Ukuran font lebih kecil untuk perangkat kecil */
+        font-size: 1.5rem;
       }
 
       button {
-        width: 100%; /* Tombol mengambil lebar penuh pada perangkat kecil */
+        width: 100%;
       }
     }
   </style>
@@ -171,7 +167,6 @@
   <audio id="clickSound" src="klik.wav" preload="auto" aria-hidden="true"></audio>
 
   <script>
-    // Hilangkan border caret setelah animasi typing selesai
     const hb = document.getElementById('happy-birthday');
     hb.addEventListener('animationend', () => {
       hb.style.borderRight = 'none';
