@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu Ulang Tahun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset dan dasar */
+    body {
+      margin: 0;
+      background: linear-gradient(270deg, #0b0b0b, #1a1a1a, #0b0b0b);
+      background-size: 600% 600%;
+      animation: bgAnimation 20s ease infinite;
+      color: #f97316;
+      font-family: 'Press Start 2P', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      user-select: none;
+      gap: 60px;
+      overflow: hidden;
+      padding: 0 20px; /* Menambahkan padding untuk perangkat kecil */
+    }
+
+    @keyframes bgAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      border: 6px solid #f97316;
+      padding: 40px 20px; /* Mengurangi padding untuk responsif */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+      box-sizing: border-box;
+      user-select: none;
+      max-width: 600px;
+      width: 90vw; /* Menggunakan 90vw untuk responsif */
+      background: rgba(20, 20, 20, 0.85);
+      box-shadow:
+        0 0 15px #f97316,
+        inset 0 0 15px #f97316;
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    #happy-birthday {
+      font-size: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #f97316;
+      max-width: 20ch;
+      animation: typing 4s steps(20) forwards, blinkCaret 0.75s step-end infinite;
+      user-select: none;
+      color: #f97316;
+      display: inline-block;
+      text-shadow: 0 0 8px #f97316;
+    }
+
+    @keyframes typing {
+      from { max-width: 0ch; }
+      to { max-width: 20ch; }
+    }
+
+    @keyframes blinkCaret {
+      50% { border-color: transparent; }
+      100% { border-color: #f97316; }
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px; /* Mengurangi jarak antar tombol untuk responsif */
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    button {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1rem;
+      padding: 18px 0;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: white;
+      border: none;
+      user-select: none;
+      transition: all 0.3s ease;
+      width: 150px; /* Mengurangi lebar tombol untuk responsif */
+      border-radius: 12px;
+      box-shadow:
+        0 0 8px rgba(0,0,0,0.6),
+        0 4px 8px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button.press-animate {
+      transform: scale(1.15);
+      box-shadow:
+        0 0 16px #fff,
+        0 8px 16px #f97316;
+    }
+
+    /* Gradient background + glow on hover */
+    button#btn-message {
+      background: linear-gradient(45deg, #2e7d32, #60ad5e);
+      box-shadow: 0 0 10px #2e7d32;
+    }
+    button#btn-message:hover {
+      filter: brightness(1.15);
+      box-shadow:
+        0 0 20px #a5d6a7,
+        0 0 40px #4caf50;
+      transform: scale(1.1);
+    }
+
+    button#btn-music {
+      background: linear-gradient(45deg, #b91c1c, #e53935);
+      box-shadow: 0 0 10px #b91c1c;
+    }
+    button#btn-music:hover {
+      filter: brightness(1.15);
+      box-shadow:
+        0 0 20px #ef9a9a,
+        0 0 40px #f44336;
+      transform: scale(1.1);
+    }
+
+    button#btn-tetris {
+      background: linear-gradient(45deg, #6b21a8, #9c27b0);
+      box-shadow: 0 0 10px #6b21a8;
+    }
+    button#btn-tetris:hover {
+      filter: brightness(1.15);
+      box-shadow:
+        0 0 20px #ce93d8,
+        0 0 40px #ab47bc;
+      transform: scale(1.1);
+    }
+
+    /* Media Queries untuk perangkat kecil */
+    @media (max-width: 600px) {
+      #happy-birthday {
+        font-size: 1.5rem; /* Ukuran font lebih kecil untuk perangkat kecil */
+      }
+
+      button {
+        width: 100%; /* Tombol mengambil lebar penuh pada perangkat kecil */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Menu ulang tahun">
+    <div id="happy-birthday" aria-live="polite">Happy Birthday!</div>
+    <div class="menu" role="navigation" aria-label="Menu pilihan">
+      <button id="btn-message" aria-label="Buka pesan ulang tahun">Message</button>
+      <button id="btn-music" aria-label="Putar musik ulang tahun">Music</button>
+      <button id="btn-tetris" aria-label="Mainkan game Tetris ulang tahun">Tetris</button>
+    </div>
+  </div>
+
+  <audio id="clickSound" src="klik.wav" preload="auto" aria-hidden="true"></audio>
+
+  <script>
+    // Hilangkan border caret setelah animasi typing selesai
+    const hb = document.getElementById('happy-birthday');
+    hb.addEventListener('animationend', () => {
+      hb.style.borderRight = 'none';
+    });
+
+    const clickSound = document.getElementById('clickSound');
+
+    function animateButton(btn) {
+      btn.classList.add('press-animate');
+      setTimeout(() => {
+        btn.classList.remove('press-animate');
+      }, 150);
+    }
+
+    function navigateTo(url, btn) {
+      animateButton(btn);
+      clickSound.currentTime = 0;
+      clickSound.play();
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300);
+    }
+
+    document.getElementById('btn-message').onclick = function() {
+      navigateTo('message.html', this);
+    };
+    document.getElementById('btn-music').onclick = function() {
+      navigateTo('music.html', this);
+    };
+    document.getElementById('btn-tetris').onclick = function() {
+      navigateTo('tetris.html', this);
+    };
+  </script>
+</body>
+</html>
